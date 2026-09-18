@@ -1,0 +1,7 @@
+Generated using the built-in image_gen tool.
+
+assets/cohete-profe.png
+Use case: illustration-story. Asset: transparent-background sprite for an educational website reward animation. One charming cartoon rocket flying horizontally toward the RIGHT, entire rocket visible, isolated on genuinely transparent background, no background scenery. In a large round cockpit window a smiling female teacher is visible from the waist up, straight shoulder-length light brown hair center part, round glasses, purple shirt, clearly waving hello with an open raised hand. White and indigo rocket body, violet fins, small golden orange exhaust to the left. Modern friendly clean hand drawn cartoon for children aged 8-15, readable at small size. Wide landscape composition, single object centered with padding, no text, no watermark.
+
+assets/reino-dragon.png
+Use case: illustration-story. Wide educational game website background illustration, Chinese landscape theme paired with a friendly dragon avatar. Beautiful distant misty karst mountains, traditional Chinese pavilion with curved tiled roof and red hanging lanterns on the far left, bamboo and flowing river along the lower edges, a few warm floating lanterns at the right edge. Jade green, deep teal, soft gold and restrained red. Polished gentle cartoon painterly style for ages 8-15, no people, no text or logos. Large quiet pale jade negative space in central 60% for white webpage panels. Decorative scenery concentrated at edges. Landscape 3:2.

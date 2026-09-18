@@ -1,0 +1,34 @@
+.perfil-lateral { position: fixed; top: 30px; left: max(12px, calc(50% - 650px)); width: 155px; padding: 16px; box-sizing: border-box; border-radius: 20px; background: white; text-align: center; box-shadow: 0 8px 24px #4338ca18; overflow-wrap: anywhere; }
+.perfil-avatar { font-size: 58px; margin: 8px; }
+.perfil-lateral button { min-width: 0; font-size: 13px; padding: 10px; background: #e0e7ff; color: #4338ca; }
+.tienda-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 16px; }
+.tienda-item { border: 2px solid #e0e7ff; border-radius: 18px; padding: 14px; text-align: center; display: flex; flex-direction: column; gap: 8px; }
+.tienda-item h4, .tienda-item p { margin: 4px 0; }
+.tienda-vista { border-radius: 12px; background: #eef2ff; font-size: 56px; padding: 18px 6px; }
+.tienda-item.bloqueado { border-style: dashed; }
+.tienda-item button { flex: none; margin-top: auto; font-size: 14px; min-width: 0; background: #6366f1; color: white; }
+.tienda-item button:disabled { opacity: .6; cursor: default; transform: none; }
+.fila-puntos { display: flex; align-items: center; flex-wrap: wrap; gap: 14px; padding: 16px 0; border-bottom: 1px solid #e0e7ff; }
+.fila-puntos strong { flex: 1; min-width: 150px; }
+.fila-puntos label { width: 130px; font-size: 13px; }
+.fila-puntos button { flex: none; background: #6366f1; color: white; }
+@media (max-width: 1300px) { .perfil-lateral { position: static; width: min(90%, 900px); margin: 20px auto; display: flex; align-items: center; justify-content: center; gap: 16px; flex-wrap: wrap; } .perfil-avatar { font-size: 40px; } }
+.agenda-form .oculto { display: none; }
+.fila-puntos .btn-quitar-puntos { background: #fff1f2; color: #be123c; }
+.fila-puntos button:disabled { opacity: .5; cursor: default; transform: none; }
+.galaxia-efectos { position: fixed; inset: 0; pointer-events: none; z-index: 0; overflow: hidden; background-image: radial-gradient(1.5px 1.5px at 18px 24px, white 95%, transparent), radial-gradient(1px 1px at 78px 99px, #e0e7ff 95%, transparent), radial-gradient(2px 2px at 143px 40px, #fde68a 95%, transparent); background-size: 173px 157px, 239px 211px, 337px 293px; }
+.vista-alumno .alumno-layout { position: relative; z-index: 1; }
+.galaxia-cohete { position: fixed; top: 12px; left: 0; z-index: 2; width: clamp(150px, 19vw, 260px); height: auto; pointer-events: none; }
+.tienda-tipo { letter-spacing: 1.4px; color: #64748b; font-weight: 800; }
+.tienda-galaxia { position: relative; }
+.tienda-galaxia::after { content: '✦ · ✧ · ✦'; position: absolute; inset: 8px; color: white; font-size: 20px; letter-spacing: 12px; pointer-events: none; }
+@media (prefers-reduced-motion: reduce) { .galaxia-cohete { display: none; } }
+.fondo-recorrido { position: fixed; inset: 0; z-index: 0; pointer-events: none; background-repeat: no-repeat; background-color: #172554; background-size: auto max(150vh, 150vw); background-position: center top; }
+.vista-alumno.fondo-con-recorrido .alumno-layout { min-height: 155vh; box-sizing: border-box; }
+.tienda-vista.tienda-paisaje { min-height: 160px; background-position: center !important; font-size: 36px; text-shadow: 0 2px 8px #0008; }
+.premio-desbloqueado { width: min(340px, calc(100vw - 48px)); box-sizing: border-box; padding: 24px; border: 2px solid #c7d2fe; border-radius: 24px; text-align: center; color: #334155; box-shadow: 0 24px 80px #312e8140; }
+.premio-desbloqueado::backdrop { background: #1e1b4b66; }
+.premio-vista { height: 155px; display: grid; place-items: center; border-radius: 16px; background: #eef2ff; font-size: 90px; }
+.premio-desbloqueado h3 { font-size: 25px; color: #4338ca; margin: 18px 0 8px; }
+.premio-desbloqueado p { line-height: 1.6; font-size: 15px; }
+.premio-desbloqueado button { background: #6366f1; color: white; width: 100%; }

@@ -1,0 +1,53 @@
+.vista-alumno { min-height: 100vh; }
+.vista-alumno .alumno-layout { display: grid; grid-template-columns: 210px minmax(0, 1fr) 260px; gap: 24px; max-width: 1600px; margin: auto; padding: 28px; align-items: start; }
+.vista-alumno .alumno-nav { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 12px; min-height: calc(100vh - 110px); border-radius: 24px; background: #ffffffed; padding: 20px 14px; box-shadow: 0 8px 24px #312e8110; }
+.vista-alumno .alumno-marca { color: #4338ca; font-size: 26px; font-weight: 800; padding: 10px; }
+.vista-alumno .alumno-nav-titulo { font-size: 10px; letter-spacing: 1.5px; color: #64748b; font-weight: 800; padding-left: 10px; }
+.vista-alumno .alumno-nav button { flex: none; min-width: 0; text-align: left; padding: 14px 12px; border-radius: 14px; box-shadow: none; font-size: 14px; background: transparent !important; color: #475569 !important; }
+.vista-alumno .alumno-nav button:hover { background: #eef2ff !important; transform: none; }
+.vista-alumno .alumno-nav button.alumno-activo { background: #4f46e5 !important; color: white !important; box-shadow: 0 4px 0 #3730a3; }
+.vista-alumno .alumno-nav-pie { margin-top: auto; padding-top: 40px; }
+.vista-alumno .alumno-nav-pie p { color: #64748b; font-size: 12px; text-align: center; }
+.vista-alumno .alumno-nav #btn-cerrarSesion { background: #fff1f2 !important; color: #be123c !important; width: 100%; }
+.vista-alumno .contenedor-menu { width: 100%; max-width: none; margin: 0; padding: 0; background: transparent; box-shadow: none; border-radius: 0; min-height: 0; min-width: 0; }
+.vista-alumno .cabecera-menu-bienvenido { width: 100%; max-width: none; margin: 0 0 22px; padding: 24px; border-radius: 24px; background: #ffffffed; box-sizing: border-box; }
+.vista-alumno #saludo-usuario { font-size: clamp(24px, 2.5vw, 34px); letter-spacing: -.7px; text-transform: none; text-shadow: none; color: #312e81; }
+.vista-alumno .alumno-subtitulo { margin: 8px 0 0; font-size: 15px; color: #64748b; }
+.vista-alumno #seccion-agenda, .vista-alumno #seccion-chat, .vista-alumno #seccion-recompensas, .vista-alumno #seccion-dudas { padding: 24px; border: 0; border-radius: 24px; background: white; margin-top: 0 !important; box-shadow: 0 8px 24px #312e8110; }
+.vista-alumno #seccion-agenda > h3 { margin-top: 0; font-size: 22px; }
+.vista-alumno #seccion-agenda > nav { background: #f1f5f9; border-radius: 16px; padding: 6px; gap: 6px; }
+.vista-alumno #seccion-agenda > nav button { min-width: 0; padding: 12px 10px; font-size: 13px; border-radius: 11px; box-shadow: none; }
+.vista-alumno #seccion-agenda > nav button[aria-pressed="false"] { background: transparent; color: #475569; }
+.vista-alumno .agenda-calendario { min-width: 560px; }
+.vista-alumno .agenda-dia { min-height: 95px; background: #fafbff; }
+.vista-alumno .agenda-hoy { background: #eef2ff; }
+.vista-alumno #agenda-pendientes, .vista-alumno #agenda-entregadas { display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 245px), 1fr)); gap: 14px; }
+.vista-alumno #agenda-pendientes .agenda-cita, .vista-alumno #agenda-entregadas .agenda-cita { padding: 18px; border-radius: 16px; margin: 0; gap: 10px; }
+.vista-alumno .alumno-derecha { min-width: 0; padding: 20px; border-radius: 24px; background: #ffffffed; }
+.vista-alumno .alumno-panel-titulo { margin: 0; font-size: 17px; text-align: center; color: #4338ca; }
+.vista-alumno .perfil-lateral { position: static; display: block; width: 100%; margin: 12px 0; padding: 14px; background: #eef2ff; box-shadow: none; border: 2px solid #e0e7ff; border-radius: 22px; }
+.vista-alumno .perfil-avatar { font-size: 76px; padding: 8px; }
+.vista-alumno .perfil-lateral p { color: #4338ca; font-size: 20px; font-weight: 800; }
+.vista-alumno .perfil-lateral button { display: none; }
+.vista-alumno #btn-recompensas { width: 100%; background: #6366f1; color: white; min-width: 0; font-size: 14px; box-shadow: 0 4px 0 #4338ca; }
+.vista-alumno .alumno-consejo { color: #64748b; font-size: 13px; line-height: 1.6; text-align: center; margin: 18px 0 26px; }
+.vista-alumno #seccion-anuncios { padding: 18px 24px; margin-bottom: 22px !important; border: 1px solid #fde68a; border-radius: 20px; box-shadow: none; }
+.vista-alumno #seccion-anuncios h3 { font-size: 15px; }
+.vista-alumno :focus-visible { outline: 3px solid #818cf8; outline-offset: 3px; }
+@media (max-width: 1150px) {
+  .vista-alumno .alumno-layout { grid-template-columns: 175px minmax(0, 1fr); gap: 18px; padding: 20px; }
+  .vista-alumno .alumno-derecha { grid-column: 2; }
+  .vista-alumno .alumno-nav { grid-row: 1 / 3; }
+}
+@media (max-width: 700px) {
+  .vista-alumno .alumno-layout { display: flex; flex-direction: column; padding: 12px; gap: 16px; }
+  .vista-alumno .alumno-nav { position: static; min-height: 0; width: 100%; box-sizing: border-box; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); padding: 12px; gap: 8px; }
+  .vista-alumno .alumno-marca { grid-column: 1 / -1; font-size: 22px; }
+  .vista-alumno .alumno-nav-titulo, .vista-alumno .alumno-nav-pie p { display: none; }
+  .vista-alumno .alumno-nav button { text-align: center; font-size: 12px; padding: 12px 6px; }
+  .vista-alumno .alumno-nav-pie { grid-column: 1 / -1; padding: 0; margin: 0; }
+  .vista-alumno .alumno-derecha { width: 100%; box-sizing: border-box; }
+  .vista-alumno #seccion-agenda, .vista-alumno #seccion-chat, .vista-alumno #seccion-recompensas, .vista-alumno #seccion-dudas { padding: 16px; }
+  .vista-alumno .cabecera-menu-bienvenido { padding: 20px; }
+}
+@media (prefers-reduced-motion: reduce) { .vista-alumno * { transition: none !important; scroll-behavior: auto !important; } }

@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vista de alumno · Demostración</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="recompensas.css">
+  <link rel="stylesheet" href="alumno.css">
+  <style>.oculto { display: none; } .demo-aviso { padding: 14px 22px; background: #312e81; color: white; text-align: center; font-weight: 700; } .demo-aviso a { color: white; margin-left: 16px; }</style>
+  <script type="importmap">
+    { "imports": { "./login.js": "./demo-datos.js", "./entregas.js": "./demo-datos.js" } }
+  </script>
+</head>
+<body>
+  <p id="demo-carga" role="status">Preparando la vista de alumno…</p>
+  <script type="module" src="demo-alumno.js"></script>
+</body>
+</html>

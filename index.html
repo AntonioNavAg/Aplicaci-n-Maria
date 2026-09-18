@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AppVideoClases</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="login.css">
+  <style>
+    .oculto { display: none !important; }
+    .logo-academia {
+      width: 120px;
+      height: auto;
+      margin-bottom: 20px;
+    }
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "date-fns": "https://cdn.jsdelivr.net/npm/date-fns@3.3.1/+esm",
+      "firebase/app": "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js",
+      "firebase/firestore": "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js"
+    }
+  }
+</script>
+</head>
+<body class="pagina-login">
+  <main class="login-escena">
+  <header class="login-titulo-fondo">
+  <h1 class="cabecera-principal">TU LUGAR PARA APRENDER</h1>
+  <h2 class="cabecera-subtitulo">¡A tu ritmo!</h2>
+  </header>
+  <div class="contenedor-login">
+    
+    <h2 id="titulo-form">Bienvenido</h2>
+    <form id="formulario">
+      <input type="text" id="input-usuario" placeholder="Usuario" aria-label="Usuario" autocomplete="username" autocapitalize="none" spellcheck="false" required>
+      <input type="password" id="input-password" placeholder="Contraseña" aria-label="Contraseña" autocomplete="current-password" required>
+      
+      <div style="display: flex; align-items: center; justify-content: start; gap: 8px; margin-top: 10px; margin-bottom: 20px;">
+        <input type="checkbox" id="check-mostrar-password" style="width: auto; margin: 0; cursor: pointer;">
+        <label for="check-mostrar-password" style="font-size: 14px; color: #64748b; font-weight: 700; cursor: pointer;">Mostrar contraseña</label>
+      </div>
+
+      <div class="botones">
+        <button type="submit" id="btn-iniciarSesion" style="width: 100%;">Iniciar Sesión</button>
+      </div>
+
+      <p id="mensaje-salida" role="alert"></p>
+    </form>
+  </div>
+  </main>
+
+  <script type="module" src="main.js"></script>
+</body>
+</html>

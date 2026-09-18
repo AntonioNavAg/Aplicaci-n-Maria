@@ -1,0 +1,26 @@
+/* Conserva la tipografía, los colores y el formulario originales de style.css. */
+.pagina-login {
+  min-height: 100vh;
+  background: #e0e7ff url('assets/login-aula-lunita.png') center center / cover no-repeat;
+}
+.login-escena { min-height: 100vh; box-sizing: border-box; padding: 1px 20px 30px; }
+.pagina-login .contenedor-login { position: relative; margin: 7vh auto 0; }
+.pagina-login .cabecera-principal { margin-bottom: 0; }
+.pagina-login .cabecera-subtitulo { margin-top: 12px; margin-bottom: 0; }
+.pagina-login #btn-iniciarSesion:disabled { opacity: .65; cursor: wait; transform: none; }
+.pagina-login :focus-visible { outline: 3px solid #6366f1; outline-offset: 3px; }
+@media (max-width: 1000px) {
+  .pagina-login { background-size: auto 100%; background-position: left center; }
+  .pagina-login .contenedor-login { max-width: 400px; }
+}
+@media (max-width: 600px) {
+  .pagina-login { background-size: auto 470px; background-position: left 100px; }
+  .login-escena { padding: 1px 16px 24px; }
+  .pagina-login .cabecera-principal { font-size: 1.8rem; }
+  .pagina-login .cabecera-subtitulo { font-size: 1.5rem; }
+  .pagina-login .contenedor-login { margin-top: 260px; padding: 28px 24px; }
+}
+@media (prefers-reduced-motion: reduce) { .pagina-login * { transition: none; } }
+.login-titulo-fondo { width: fit-content; max-width: 100%; box-sizing: border-box; margin: 4vh auto 0; padding: 18px 28px; border: 1px solid #ffffffc9; border-radius: 22px; background: #ffffffd9; backdrop-filter: blur(6px); }
+.pagina-login .login-titulo-fondo .cabecera-principal { margin-top: 0; text-shadow: none; }
+.pagina-login .login-titulo-fondo .cabecera-subtitulo { text-shadow: none; }

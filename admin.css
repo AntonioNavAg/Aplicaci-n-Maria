@@ -1,0 +1,66 @@
+.vista-admin { background: #eef2f8; min-height: 100vh; }
+.vista-admin .admin-layout { display: grid; grid-template-columns: 245px minmax(0, 1fr); gap: 28px; max-width: 1550px; margin: auto; padding: 28px; align-items: start; }
+.vista-admin .admin-nav { position: sticky; top: 24px; display: flex; flex-direction: column; gap: 8px; padding: 24px 16px; border-radius: 22px; background: #fff; box-shadow: 0 6px 24px #1e293b08; }
+.vista-admin .admin-marca { color: #312e81; font-size: 21px; font-weight: 800; padding: 4px 10px; }
+.vista-admin .admin-rol { margin: 8px 10px 12px; font-size: 10px; color: #64748b; letter-spacing: 1.8px; font-weight: 800; }
+.vista-admin .admin-nav-grupo { color: #64748b; font-weight: 800; font-size: 10px; letter-spacing: 1.5px; margin: 20px 10px 4px; }
+.vista-admin .admin-nav .admin-nav-boton { flex: none; min-width: 0; width: 100%; padding: 12px !important; background: transparent !important; color: #475569 !important; text-align: left; font-size: 14px !important; box-shadow: none; border-radius: 12px !important; }
+.vista-admin .admin-nav .admin-nav-boton:hover { transform: none; background: #eef2ff !important; }
+.vista-admin .admin-nav .admin-nav-boton.admin-activo { background: #4f46e5 !important; color: white !important; }
+.vista-admin .admin-nav-pie { border-top: 1px solid #e2e8f0; margin-top: 24px; padding-top: 16px; }
+.vista-admin .admin-nav #btn-cerrarSesion { width: 100%; background: #fff1f2 !important; color: #be123c !important; font-size: 14px; box-shadow: none; }
+.vista-admin .contenedor-menu { min-width: 0; width: 100%; max-width: none; margin: 0; padding: 0; min-height: 0; border-radius: 0; background: transparent; box-shadow: none; }
+.vista-admin .cabecera-menu-bienvenido { width: 100%; max-width: none; box-sizing: border-box; margin: 0 0 22px; padding: 24px 28px; background: #fff; border: 1px solid #e2e8f0; border-radius: 22px; }
+.vista-admin .admin-indicador { display: inline-block; border-radius: 8px; background: #eef2ff; color: #4338ca; padding: 5px 9px; font-size: 12px; font-weight: 800; margin-bottom: 12px; }
+.vista-admin #saludo-usuario { color: #1e293b; font-size: clamp(24px, 3vw, 32px); text-transform: none; letter-spacing: -.5px; text-shadow: none; }
+.vista-admin .admin-subtitulo { margin: 8px 0 0; color: #64748b; font-size: 14px; }
+.vista-admin #seccion-anuncios { border-radius: 18px; padding: 20px 24px; box-shadow: none; }
+.vista-admin #seccion-anuncios h3 { font-size: 17px; }
+.vista-admin .admin-panel { padding: 24px; border: 1px solid #e2e8f0 !important; border-radius: 22px !important; background: white; margin-top: 0 !important; box-shadow: 0 6px 24px #1e293b08; }
+.vista-admin .admin-panel > h3 { margin-top: 0; font-size: 22px; }
+.vista-admin #seccion-agenda > nav { background: #f1f5f9; padding: 6px; border-radius: 14px; gap: 6px; }
+.vista-admin #seccion-agenda > nav button { box-shadow: none; font-size: 14px; border-radius: 10px; }
+.vista-admin #seccion-agenda > nav button[aria-pressed="false"] { background: transparent; color: #475569; }
+.vista-admin #btn-nueva-cita { background: #4f46e5; color: white; border-radius: 12px; }
+.vista-admin #agenda-actualizar { background: #eef2ff; color: #4338ca; box-shadow: none; }
+.vista-admin .item-matriculado { gap: 12px; }
+.vista-admin :focus-visible { outline: 3px solid #818cf8; outline-offset: 3px; }
+@media (max-width: 1000px) { .vista-admin .admin-layout { grid-template-columns: 200px minmax(0, 1fr); padding: 18px; gap: 18px; } .vista-admin .admin-panel { padding: 18px; } }
+@media (max-width: 700px) {
+  .vista-admin .admin-layout { display: flex; flex-direction: column; padding: 12px; }
+  .vista-admin .admin-nav { position: static; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); width: 100%; box-sizing: border-box; padding: 16px; }
+  .vista-admin .admin-marca, .vista-admin .admin-rol, .vista-admin .admin-nav-grupo, .vista-admin .admin-nav-pie { grid-column: 1 / -1; }
+  .vista-admin .cabecera-menu-bienvenido { padding: 20px; }
+  .vista-admin .admin-nav-grupo { margin-top: 10px; }
+  .vista-admin .admin-nav .admin-nav-boton { font-size: 13px !important; }
+  .vista-admin #seccion-agenda > nav button { min-width: 0; font-size: 12px; padding: 10px; }
+}
+@media (prefers-reduced-motion: reduce) { .vista-admin * { transition: none !important; } }
+.vista-admin .admin-vista-alumno { display: block; padding: 12px; margin-bottom: 12px; border-radius: 12px; background: #eef2ff; color: #4338ca; font-size: 14px; font-weight: 800; text-decoration: none; text-align: center; }
+.vista-admin .admin-vista-alumno:hover { background: #e0e7ff; }
+.matriculas-cabecera h3 { margin: 0 0 8px; font-size: 24px; color: #1e293b; }
+.matriculas-cabecera p { margin: 0 0 22px; color: #64748b; font-size: 14px; }
+.matriculas-resumen { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-bottom: 14px; }
+.matriculas-resumen > div { background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 14px; padding: 14px 18px; }
+.matriculas-resumen strong { display: block; font-size: 26px; color: #4338ca; }
+.matriculas-resumen span { color: #64748b; font-size: 12px; font-weight: 700; }
+.matriculas-listado { display: grid; gap: 12px; margin-top: 12px; }
+.matricula-tarjeta { display: grid; grid-template-columns: minmax(170px, 1fr) minmax(150px, .7fr) minmax(180px, auto); align-items: center; gap: 20px; border: 1px solid #e2e8f0; padding: 20px; border-radius: 16px; background: white; }
+.matricula-tarjeta[hidden] { display: none; }
+.matricula-identidad { display: flex; align-items: center; gap: 12px; min-width: 0; }
+.matricula-identidad strong { display: block; color: #1e293b; font-size: 16px; overflow-wrap: anywhere; }
+.matricula-identidad small { display: block; color: #64748b; margin-top: 4px; overflow-wrap: anywhere; }
+.matricula-avatar { display: grid; place-items: center; flex: 0 0 44px; height: 44px; background: #eef2ff; color: #4338ca; font-weight: 800; border-radius: 14px; }
+.matricula-estado { display: flex; flex-direction: column; align-items: flex-start; gap: 8px; }
+.matricula-estado small { color: #64748b; font-size: 12px; }
+.matricula-insignia { padding: 5px 10px; border-radius: 20px; font-size: 12px; font-weight: 800; }
+.matricula-insignia.activa { background: #dcfce7; color: #166534; }
+.matricula-insignia.caducada { background: #fef3c7; color: #92400e; }
+.matricula-insignia.cancelada { background: #ffe4e6; color: #9f1239; }
+.matricula-acciones { display: flex; flex-direction: column; gap: 8px; }
+.matricula-acciones button { min-width: 0; padding: 10px 14px; border-radius: 10px; font-size: 13px; box-shadow: none; }
+.matricula-renovar { color: white; background: #4f46e5; }
+.matricula-cancelar { color: #be123c; background: #fff1f2; }
+.matricula-acciones button:disabled { opacity: .55; cursor: default; transform: none; }
+@media (max-width: 1050px) { .matricula-tarjeta { grid-template-columns: 1fr auto; } .matricula-acciones { grid-column: 1 / -1; flex-direction: row; flex-wrap: wrap; } }
+@media (max-width: 500px) { .matriculas-resumen { grid-template-columns: repeat(2, 1fr); } .matricula-tarjeta { grid-template-columns: 1fr; padding: 16px; gap: 14px; } }

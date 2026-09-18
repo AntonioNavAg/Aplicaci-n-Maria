@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Menú Principal</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="recompensas.css">
+  <link rel="stylesheet" href="alumno.css">
+  <link rel="stylesheet" href="admin.css">
+  <style>
+    .oculto {
+      display: none;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 15px;
+    }
+    th, td {
+      border: 1px solid #ccc;
+      padding: 8px;
+      text-align: left;
+    }
+  </style>
+  <script type="importmap">
+  {
+    "imports": {
+      "date-fns": "https://cdn.jsdelivr.net/npm/date-fns@3.3.1/+esm",
+      "firebase/app": "https://www.gstatic.com/firebasejs/10.8.1/firebase-app.js",
+      "firebase/firestore": "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js",
+      "firebase/storage": "https://www.gstatic.com/firebasejs/10.8.1/firebase-storage.js"
+    }
+  }
+</script>
+</head>
+<body>
+<div class="cabecera-menu-bienvenido">
+    <h1 id="saludo-usuario" class="bienvenido-alumno"></h1>
+  </div>
+  <div class="contenedor-menu">
+    <h2>Menú Principal</h2>
+    
+    <div id="seccion-anuncios" class="lista-elegante" style="border-color: #f59e0b; background-color: #fffbeb; margin-bottom: 25px;">
+      <h3 style="margin-top: 0; color: #d97706; display: flex; align-items: center; gap: 8px;">
+        📢 Tablón de Anuncios
+      </h3>
+      
+      <div id="admin-controls-anuncios" class="oculto" style="margin-bottom: 15px; padding-bottom: 15px; border-bottom: 2px dashed #fcd34d;">
+        <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+          <input type="text" id="input-nuevo-anuncio" placeholder="Escribe un nuevo anuncio..." style="flex: 3; margin: 0; border-color: #fcd34d;">
+          <button id="btn-anadir-anuncio" style="flex: 1; background-color: #f59e0b !important; color: white !important; min-width: 100px;">Publicar</button>
+        </div>
+      </div>
+
+      <div id="lista-anuncios">
+      </div>
+    </div>
+
+    <div class="botones">
+      <button type="button" id="btn-agenda" aria-expanded="false" aria-controls="seccion-agenda">Tareas y calendario</button>
+      <button type="button" id="btn-recompensas" aria-expanded="false" aria-controls="seccion-recompensas">Mi avatar y fondos</button>
+      <button type="button" id="btn-abrir-chat" aria-expanded="false" aria-controls="seccion-chat" style="background-color: #8b5cf6 !important; color: white !important;">💬 Chat</button>
+    </div>
+
+    <section id="seccion-recompensas" class="oculto" aria-label="Puntos y personalización"></section>
+    <section id="seccion-agenda" class="oculto" aria-label="Tareas y calendario">
+      <h3>Tareas y calendario</h3>
+      <button type="button" id="btn-nueva-cita" class="oculto" aria-haspopup="dialog" aria-controls="dialogo-cita">Nueva clase o entrega</button>
+      <dialog id="dialogo-detalle-cita" class="agenda-modal" aria-labelledby="titulo-detalle-cita">
+        <div class="detalle-cita-contenido">
+          <h4 id="titulo-detalle-cita">Detalles de la cita</h4>
+          <div id="detalle-cita"></div>
+          <button type="button" id="cerrar-detalle-cita">Cerrar</button>
+        </div>
+      </dialog>
+      <dialog id="dialogo-cita" class="agenda-modal" aria-labelledby="titulo-cita">
+      <form id="form-cita" class="agenda-form">
+        <h4 id="titulo-cita">Nueva clase o entrega</h4>
+        <label>Descripción o nombre de la tarea<input name="titulo" required maxlength="200" placeholder="Ej.: Repaso del tema 3"></label>
+        <label>Alumno<select name="usuario" id="agenda-alumno" required><option value="">Selecciona alumno</option></select></label>
+        <label>Tipo de cita<select name="tipo" required><option value="">Selecciona el tipo</option><option value="clase">Clase</option><option value="tarea">Entrega de tarea</option></select></label>
+        <fieldset id="detalles-cita" class="oculto" disabled>
+        <label>Fecha<input name="fecha" type="date" required></label>
+        <label>Hora<select name="hora" id="agenda-hora" required><option value="">Selecciona hora</option></select></label>
+        <label>Enlace (opcional)<input name="url" type="url" placeholder="https://…"></label>
+        <label id="campo-puntos-tarea" class="oculto">Puntos al entregar la tarea<input name="puntosRecompensa" type="number" min="0" max="10000" step="1" value="10"><small>Se conceden una sola vez cuando la profesora la marca como entregada.</small></label>
+        </fieldset>
+        <p id="cita-estado" role="status"></p>
+        <button type="submit">Guardar cita</button>
+        <button type="button" id="cerrar-cita">Cancelar</button>
+      </form>
+      </dialog>
+      <dialog id="dialogo-entrega" class="agenda-modal" aria-labelledby="titulo-entrega">
+        <form id="form-entrega" class="agenda-form">
+          <h4 id="titulo-entrega">Entregar tarea</h4>
+          <p id="nombre-tarea-entrega"></p>
+          <label>Archivo<input id="archivo-entrega" type="file" required accept=".pdf,.doc,.docx,.odt,.txt,.jpg,.jpeg,.png,.ppt,.pptx,.xls,.xlsx"></label>
+          <p>Documentos e imágenes, hasta 10 MB.</p>
+          <p id="entrega-estado" role="status"></p>
+          <button type="submit">Enviar tarea</button>
+          <button type="button" id="cerrar-entrega">Cancelar</button>
+        </form>
+      </dialog>
+      <p id="agenda-estado" role="status" aria-live="polite"></p>
+      <nav class="botones" aria-label="Secciones de la agenda">
+        <button type="button" id="ver-calendario" aria-pressed="true" aria-controls="vista-calendario">Calendario</button>
+        <button type="button" id="ver-pendientes" aria-pressed="false" aria-controls="vista-pendientes">Tareas pendientes</button>
+        <button type="button" id="ver-entregadas" aria-pressed="false" aria-controls="vista-entregadas">Tareas entregadas</button>
+      </nav>
+      <section id="vista-pendientes" class="oculto" aria-label="Tareas pendientes">
+      <h4>Tareas pendientes</h4>
+      <div id="agenda-pendientes"></div>
+      </section>
+      <section id="vista-entregadas" class="oculto" aria-label="Tareas entregadas">
+      <h4>Tareas entregadas</h4>
+      <div id="agenda-entregadas"></div>
+      </section>
+      <section id="vista-calendario" aria-label="Calendario">
+      <h4>Calendario de clases y entregas</h4>
+      <div class="agenda-navegacion">
+        <button type="button" id="mes-anterior" aria-label="Mes anterior">←</button>
+        <h4 id="agenda-mes" aria-live="polite"></h4>
+        <button type="button" id="mes-siguiente" aria-label="Mes siguiente">→</button>
+        <button type="button" id="mes-hoy">Hoy</button>
+      </div>
+      <p class="agenda-leyenda">● Clase · ◆ Entrega de tarea · ✓ Entregada</p>
+      <div class="agenda-calendario-scroll"><div id="agenda-calendario" class="agenda-calendario"></div></div>
+      <details id="agenda-antiguas"><summary>Citas sin fecha</summary><div id="agenda-sin-fecha"></div></details>
+      </section>
+      <button type="button" id="agenda-actualizar">Actualizar agenda</button>
+    </section>
+
+    <div id="seccion-chat" class="oculto lista-elegante" style="border: 2px solid #8b5cf6; margin-top: 20px;">
+  <h3 style="color: #6d28d9; margin-top: 0;">Mensajes Privados</h3>
+  
+  <div id="admin-selector-chat" class="oculto" style="margin-bottom: 15px;">
+    <label for="select-usuario-chat">Hablar con el alumno:</label>
+    <select id="select-usuario-chat"></select>
+  </div>
+
+  <div id="caja-mensajes" style="height: 250px; overflow-y: auto; background: white; border: 1px solid #e2e8f0; padding: 10px; border-radius: 12px; display: flex; flex-direction: column; gap: 10px; margin-bottom: 10px;">
+    </div>
+
+  <div style="display: flex; gap: 8px;">
+    <input type="text" id="input-texto-chat" placeholder="Escribe..." style="flex: 1; margin: 0;">
+    <button id="btn-enviar-chat" style="background-color: #8b5cf6 !important; color: white !important; width: auto; margin: 0; padding: 0 15px;">Enviar</button>
+  </div>
+</div>
+
+    <div id="seccion-dudas" class="oculto lista-elegante" style="margin-top: 25px; border-color: #bfdbfe; background-color: #eff6ff;">
+      <h3 style="margin-top: 0; color: #1d4ed8;">Buzón de Dudas</h3>
+      <p style="font-size: 14px; color: #475569; margin-bottom: 15px;">Escribe tu duda aquí y le llegará directamente al correo de la profesora.</p>
+      <textarea id="input-duda" rows="4" placeholder="Escribe tu mensaje..." style="width: 100%; padding: 12px; border: 2px solid #cbd5e1; border-radius: 12px; font-family: 'Nunito', sans-serif; resize: vertical; margin-bottom: 10px; box-sizing: border-box;"></textarea>
+      <button id="btn-enviar-duda" style="background-color: #3b82f6 !important; color: white !important; width: 100%;">Enviar correo</button>
+      <p id="mensaje-duda-estado" class="oculto" style="margin-top: 15px; text-align: center; font-weight: 800; font-size: 15px;"></p>
+    </div>
+
+    <div class="botones">
+      <button id="btn-ver-matriculados" class="oculto btn-admin-estilizado">Ver matriculados</button>
+      <button id="btn-crear-cuenta-admin" class="oculto btn-admin-estilizado" style="background-color: #10b981 !important;">Crear cuenta</button>
+      <button id="btn-eliminar-cuenta" class="oculto btn-admin-estilizado" style="background-color: #f43f5e !important;">Eliminar cuenta</button>
+      <button id="btn-hacer-admin" class="oculto btn-admin-estilizado" style="background-color: #8b5cf6 !important;">Añadir admin</button>
+      <button id="btn-eliminar-propia-cuenta" class="oculto btn-admin-estilizado" style="background-color: #f59e0b !important;">Eliminar mi cuenta</button>
+    </div>
+
+    <div id="lista-matriculados" class="oculto lista-elegante"></div>
+    <div id="lista-eliminar-cuenta" class="oculto lista-elegante"></div>
+    <div id="lista-hacer-admin" class="oculto lista-elegante"></div>
+
+    <div id="panel-crear-cuenta" class="oculto lista-elegante">
+      <h4 style="margin-top:0; color:#10b981;">Crear Nueva Cuenta</h4>
+      <p style="font-size: 14px; color: #64748b; margin-bottom: 15px;">Introduce los datos del nuevo alumno.</p>
+      <input type="text" id="input-nuevo-nombre" placeholder="Nombre y apellidos completos">
+      <input type="text" id="input-nuevo-usuario" placeholder="Usuario">
+      <input type="password" id="input-nueva-password" placeholder="Contraseña">
+      <input type="password" id="input-nueva-password-confirm" placeholder="Repite la contraseña">
+      
+      <p id="error-crear-cuenta" class="oculto" style="color: #e11d48; background-color: #fff1f2; padding: 10px; border-radius: 8px; border: 1px solid #ffe4e6; font-size: 14px; font-weight: 800; margin-bottom: 15px;"></p>
+
+      <div class="botones">
+        <button id="btn-confirmar-crear" style="background-color: #10b981 !important; color: white !important;">Crear Alumno</button>
+        <button id="btn-cancelar-crear" style="background-color: #94a3b8 !important; color: white !important;">Cancelar</button>
+      </div>
+    </div>
+
+    <div id="confirmacion-accion" class="oculto lista-elegante">
+      <h4 id="titulo-confirmacion" style="margin-top:0;">Confirmar acción</h4>
+      <p id="texto-confirmacion" style="font-size: 14px; color: #64748b; margin-bottom: 15px;"></p>
+      <div class="botones">
+        <button id="btn-confirmar-accion" style="color: white !important;">Confirmar</button>
+        <button id="btn-cancelar-accion" style="background-color: #94a3b8 !important; color: white !important;">Cancelar</button>
+      </div>
+    </div>
+
+    <div id="confirmacion-eliminar-propia" class="oculto lista-elegante">
+      <h4 style="margin-top:0; color:#f59e0b;">Confirmar eliminación</h4>
+      <p style="font-size: 14px; color: #64748b; margin-bottom: 15px;">Introduce tus datos para borrar tu cuenta permanentemente.</p>
+      <input type="text" id="input-eliminar-usuario" placeholder="Tu usuario">
+      <input type="password" id="input-eliminar-password" placeholder="Tu contraseña">
+      
+      <p id="error-eliminar-propia" class="oculto" style="color: #e11d48; background-color: #fff1f2; padding: 10px; border-radius: 8px; border: 1px solid #ffe4e6; font-size: 14px; font-weight: 800; margin-bottom: 15px;"></p>
+
+      <div class="botones">
+        <button id="btn-confirmar-eliminar" style="background-color: #f43f5e !important; color: white !important;">Borrar mi cuenta</button>
+        <button id="btn-cancelar-eliminar" style="background-color: #94a3b8 !important; color: white !important;">Cancelar</button>
+      </div>
+    </div>     
+
+    <div class="contenedor-boton-abajo">
+      <button type="button" id="btn-cerrarSesion" style="background-color: #dc3545; color: white;">Cerrar Sesión</button>
+    </div>
+  </div>
+
+  <script type="module" src="menu.js"></script>
+</body>
+</html>
