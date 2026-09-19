@@ -195,8 +195,14 @@ export function iniciarAgenda(esAdmin) {
       if (fecha.getMonth() !== mes.getMonth()) celda.classList.add('agenda-otro-mes');
       if (clave === fechaLocal(new Date())) celda.classList.add('agenda-hoy');
       celda.append(crear('strong', String(fecha.getDate())));
-      citas.filter(cita => cita.fecha === clave).forEach(cita => celda.append(tarjeta(cita, true)));
+      celda.dataset.fecha = fecha.toLocaleDateString('es-ES', { weekday: 'long', day: 'numeric', month: 'long' });
+      const citasDia = citas.filter(cita => cita.fecha === clave);
+      celda.classList.toggle('agenda-con-citas', citasDia.length > 0);
+      citasDia.forEach(cita => celda.append(tarjeta(cita, true)));
       calendario.append(celda);
+    }
+    if (!citas.some(cita => cita.fecha?.startsWith(fechaLocal(mes).slice(0, 7)))) {
+      calendario.append(crear('p', 'No hay citas este mes. Puedes consultar otro mes con las flechas.', 'agenda-movil-vacia'));
     }
   }
 

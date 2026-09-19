@@ -1,3 +1,4 @@
+import { prepararNavegacionMovil } from './navegacion-movil.js';
 export function organizarAdmin() {
   const el = id => document.getElementById(id);
   const crear = (tag, clase, texto = '') => {
@@ -79,4 +80,5 @@ export function organizarAdmin() {
   }
   principal.querySelector('.contenedor-boton-abajo')?.remove();
   el('btn-agenda').click();
+  prepararNavegacionMovil(nav);
 }

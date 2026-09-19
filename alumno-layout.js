@@ -1,3 +1,4 @@
+import { prepararNavegacionMovil } from './navegacion-movil.js';
 // Esta distribución se aplica exclusivamente después de comprobar el rol de alumno.
 export function organizarAlumno(nombre = sessionStorage.getItem('nombreUsuario') || 'de nuevo') {
   const el = id => document.getElementById(id);
@@ -76,4 +77,5 @@ export function organizarAlumno(nombre = sessionStorage.getItem('nombreUsuario')
   el('ver-pendientes').textContent = '🚀 Tareas pendientes';
   el('ver-entregadas').textContent = '✓ Tareas entregadas';
   agenda.click();
+  prepararNavegacionMovil(lateral);
 }
