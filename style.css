@@ -1,5 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;700;800&display=swap');
 
+.aviso-chat { margin-top: 12px; padding-top: 12px; border-top: 1px solid #ddd6fe; }
+.aviso-chat button { background: #ede9fe; color: #5b21b6; min-width: 0; width: 100%; font-size: 13px; padding: 10px; }
+.aviso-chat button:disabled { opacity: .65; cursor: default; transform: none; }
+.aviso-chat small { display: block; margin-top: 6px; color: #64748b; }
+.aviso-chat p { font-size: 13px; margin: 6px 0 0; }
+.aviso-chat p:empty { display: none; }
+
 body {
   font-family: 'Nunito', Arial, sans-serif;
   margin: 0;
