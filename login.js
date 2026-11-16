@@ -139,7 +139,8 @@ export const obtenerUsuarios = async () => {
   const querySnapshot = await getDocs(collection(db, "usuarios"));
   let usuarios = [];
   querySnapshot.forEach((doc) => {
-    usuarios.push({ id: doc.id, ...doc.data() });
+    const datos = doc.data();
+    usuarios.push({ id: doc.id, ...datos, nombreCompleto: nombreVisible(datos.usuario, datos.nombreCompleto) });
   });
   return usuarios;
 }
@@ -245,13 +246,15 @@ export const obtenerUsuarioActual = async () => {
   const usuario = sessionStorage.getItem('nombreUsuario');
   if (!usuario) return null;
   const resultado = await getDocs(query(collection(db, 'usuarios'), where('usuario', '==', usuario)));
-  return resultado.empty ? null : resultado.docs[0].data();
+  if (resultado.empty) return null;
+  const datos = resultado.docs[0].data();
+  return { ...datos, nombreCompleto: nombreVisible(datos.usuario, datos.nombreCompleto) };
 };
 
 export const obtenerNombreUsuario = async usuario => {
   if (usuario === 'admin') return nombreVisible(usuario);
   const resultado = await getDocs(query(collection(db, 'usuarios'), where('usuario', '==', usuario)));
-  return resultado.empty ? usuario : resultado.docs[0].data().nombreCompleto || usuario;
+  return nombreVisible(usuario, resultado.empty ? '' : resultado.docs[0].data().nombreCompleto);
 };
 
 export const renovarSuscripcion = async (id) => {

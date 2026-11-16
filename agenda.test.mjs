@@ -1,6 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { readFileSync } from 'node:fs';
+import { nombreVisible } from './nombres.js';
 import { normalizarCita, validarCita, ordenarCitas, enlaceSeguro } from './agenda-modelo.js';
 import { saldo, cantidadPuntos, comprarOEquipar } from './recompensas-modelo.js';
 
@@ -62,7 +63,7 @@ function apiSimulada(actual) {
     doc: (_, nombre, id) => ({ nombre, id })
   };
   const codigo = readFileSync(new URL('./login.js', import.meta.url), 'utf8').replace(/^import .*;\r?\n/gm, '').replace(/export /g, '');
-  const api = new Function(...Object.keys(mocks), `${codigo}; return { obtenerAgenda, crearCita, completarTarea, completarCita, darPuntos, personalizarPerfil };`)(...Object.values(mocks));
+  const api = new Function('nombreVisible', ...Object.keys(mocks), `${codigo}; return { obtenerAgenda, crearCita, completarTarea, completarCita, darPuntos, personalizarPerfil };`)(nombreVisible, ...Object.values(mocks));
   return { api, escrituras, filas };
 }
 
