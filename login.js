@@ -100,6 +100,16 @@ export const borrarCuenta = async (usuario, contraseña) => {
 export const iniciarSesion = async (usuario, contraseña) => {
   const dbRef = collection(db, "usuarios");
   const snapshotAll = await getDocs(dbRef);
+  // Alias de acceso: conserva el identificador al que pertenecen chats y datos.
+  const entrada = usuario.trim();
+  const esAliasMaria = entrada.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase() === 'maria';
+  const cuentas = snapshotAll.docs.map(documento => documento.data());
+  if (esAliasMaria && !cuentas.some(cuenta => cuenta.usuario === entrada)) {
+    const profesora = cuentas.find(cuenta => cuenta.usuario === 'admin' && cuenta.esAdmin === true);
+    if (profesora) usuario = profesora.usuario;
+  } else {
+    usuario = entrada;
+  }
   
   if (snapshotAll.empty && usuario === 'admin' && contraseña === '123') {
      await addDoc(dbRef, {
@@ -132,7 +142,7 @@ export const iniciarSesion = async (usuario, contraseña) => {
     return "Tu suscripción ha caducado. Contacta con administración para renovarla.";
   }
   
-  return { success: true, esAdmin: userData.esAdmin };
+  return { success: true, esAdmin: userData.esAdmin, usuario: userData.usuario };
 }
 
 export const obtenerUsuarios = async () => {

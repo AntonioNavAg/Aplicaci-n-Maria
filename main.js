@@ -45,7 +45,7 @@ formularioLogin.addEventListener('submit', async (evento) => {
   
   if (resultado && resultado.success) {
     sessionStorage.setItem('esAdmin', resultado.esAdmin);
-    sessionStorage.setItem('nombreUsuario', inputUsuario.value);
+    sessionStorage.setItem('nombreUsuario', resultado.usuario);
     window.location.href = 'menu.html';
   } else {
     mostrarEnPantalla(resultado);
