@@ -756,8 +756,16 @@ inputTextoChat.addEventListener('keydown', evento => {
 });
 
 if (!esAdmin) {
-  const { iniciarAvisoChat } = await import('./aviso-chat.js');
-  iniciarAvisoChat(false);
-}
-if (!esAdmin) organizarAlumno();
-else organizarAdmin();
+  organizarAlumno();
+  // El aviso por correo es opcional: nunca debe bloquear el aula.
+  import('./aviso-chat.js')
+    .then(({ iniciarAvisoChat }) => iniciarAvisoChat(false))
+    .catch(() => {
+      const panel = document.getElementById('aviso-chat');
+      const boton = document.getElementById('btn-aviso-chat');
+      const estado = document.getElementById('estado-aviso-chat');
+      panel?.classList.remove('oculto');
+      if (boton) boton.disabled = true;
+      if (estado) estado.textContent = 'El aviso por correo no está disponible ahora. Puedes seguir usando el chat.';
+    });
+} else organizarAdmin();
