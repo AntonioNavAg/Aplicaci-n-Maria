@@ -1,4 +1,5 @@
 import { iniciarAgenda } from './agenda.js';
+import { nombreVisible } from './nombres.js';
 import { organizarAlumno } from './alumno-layout.js';
 import { organizarAdmin } from './admin-layout.js';
 import { iniciarRecompensas } from './recompensas.js';
@@ -37,7 +38,7 @@ iniciarRecompensas(esAdmin);
 const elementoSaludo = document.getElementById('saludo-usuario');
 
 if (elementoSaludo && nombreGuardado) {
-    elementoSaludo.textContent = `¡BIENVENID@, ${nombreGuardado.toUpperCase()}!`;
+    elementoSaludo.textContent = `¡BIENVENID@, ${nombreVisible(nombreGuardado)}!`;
 }
 
 const btnVerMatriculados = document.getElementById('btn-ver-matriculados');
@@ -695,7 +696,7 @@ const cargarChat = async () => {
         const cabecera = document.createElement('div');
         cabecera.className = 'chat-cabecera-mensaje';
         const remitente = document.createElement('strong');
-        remitente.textContent = soyYo ? 'Tú' : nombresChat.get(m.emisor) || m.emisor;
+        remitente.textContent = soyYo ? 'Tú' : nombreVisible(m.emisor, nombresChat.get(m.emisor));
         const fecha = document.createElement('time');
         fecha.textContent = m.fechaLegible || '';
         if (Number.isFinite(m.fecha)) fecha.dateTime = new Date(m.fecha).toISOString();
@@ -754,5 +755,9 @@ inputTextoChat.addEventListener('keydown', evento => {
     }
 });
 
+if (!esAdmin) {
+  const { iniciarAvisoChat } = await import('./aviso-chat.js');
+  iniciarAvisoChat(false);
+}
 if (!esAdmin) organizarAlumno();
 else organizarAdmin();

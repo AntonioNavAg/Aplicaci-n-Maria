@@ -1,4 +1,5 @@
 import { format } from 'date-fns';
+import { nombreVisible } from './nombres.js';
 import { estadoSuscripcion, calcularRenovacion } from './suscripcion.js';
 import { normalizarCita, validarCita, ordenarCitas } from './agenda-modelo.js';
 import { saldo, cantidadPuntos, comprarOEquipar } from './recompensas-modelo.js';
@@ -102,7 +103,7 @@ export const iniciarSesion = async (usuario, contraseña) => {
   
   if (snapshotAll.empty && usuario === 'admin' && contraseña === '123') {
      await addDoc(dbRef, {
-        nombreCompleto: 'Admin Predeterminado',
+        nombreCompleto: 'María',
         usuario: 'admin',
         password: '123',
         fecha: format(new Date(), 'dd-MM-yyyy'),
@@ -248,6 +249,7 @@ export const obtenerUsuarioActual = async () => {
 };
 
 export const obtenerNombreUsuario = async usuario => {
+  if (usuario === 'admin') return nombreVisible(usuario);
   const resultado = await getDocs(query(collection(db, 'usuarios'), where('usuario', '==', usuario)));
   return resultado.empty ? usuario : resultado.docs[0].data().nombreCompleto || usuario;
 };

@@ -1,4 +1,5 @@
 import { prepararNavegacionMovil } from './navegacion-movil.js';
+import { nombreVisible } from './nombres.js';
 export function organizarAdmin() {
   const el = id => document.getElementById(id);
   const crear = (tag, clase, texto = '') => {
@@ -19,7 +20,7 @@ export function organizarAdmin() {
   principal.setAttribute('role', 'main');
   principal.querySelector(':scope > h2')?.remove();
   principal.prepend(cabecera);
-  el('saludo-usuario').textContent = `Hola, ${sessionStorage.getItem('nombreUsuario') || 'profe'}`;
+  el('saludo-usuario').textContent = `Hola, ${nombreVisible(sessionStorage.getItem('nombreUsuario') || 'profe')}`;
   cabecera.append(crear('p', 'admin-subtitulo', 'Organiza tus clases, revisa las entregas y gestiona a tus alumnos.'));
   const indicador = crear('span', 'admin-indicador', 'Panel de gestión');
   cabecera.prepend(indicador);
